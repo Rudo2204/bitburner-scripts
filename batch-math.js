@@ -124,10 +124,10 @@ export function calculateDelaysFormulas(ns, target, max_level) {
 		}
 	}
 
-	const hack_delay = depth * period - 4 * t0 - hack_time;
-	const weak_delay_1 = depth * period - 3 * t0 - weak_time;
-	const grow_delay = depth * period - 2 * t0 - grow_time;
-	const weak_delay_2 = depth * period - 1 * t0 - weak_time;
+	const hack_delay = depth * period - 4 * t0 - hack_time_min;
+	const weak_delay_1 = depth * period - 3 * t0 - weak_time_min;
+	const grow_delay = depth * period - 2 * t0 - grow_time_min;
+	const weak_delay_2 = depth * period - 1 * t0 - weak_time_min;
 
 	return {
 		period,
