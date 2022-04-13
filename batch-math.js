@@ -76,7 +76,8 @@ export function calculateDelaysNoFormulas(ns, target) {
 		hack_delay,
 		weak_delay_1,
 		grow_delay,
-		weak_delay_2
+		weak_delay_2,
+		depth
 	};
 }
 
@@ -134,6 +135,7 @@ export function calculateDelaysFormulas(ns, target, max_level) {
 		hack_delay,
 		weak_delay_1,
 		grow_delay,
-		weak_delay_2
+		weak_delay_2,
+		depth
 	};
 }
