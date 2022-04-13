@@ -98,7 +98,7 @@ export function calculateDelaysFormulas(ns, target, max_level) {
 
 	let period, depth;
 	const max_depth = 10;
-	const kW_max = Math.min(Math.floor(1 + (weak_time - 4 * t0) / (8 * t0)), max_depth);
+	const kW_max = Math.min(Math.floor(1 + (weak_time_min - 4 * t0) / (8 * t0)), max_depth);
 	//const kW_max = Math . floor (1 + ( weak_time - 4 * t0 ) / (8 * t0 ));
 	schedule: for (let kW = kW_max; kW >= 1; --kW) {
 		const t_min_W = (weak_time_min + 4 * t0) / kW;
