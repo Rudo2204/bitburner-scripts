@@ -1,4 +1,4 @@
-import { getNetworkNodes, canHack, getThresholds, getAvailableRam } from "./utils.js";
+import { getNetworkNodes, canHack, getAvailableRam } from "./utils.js";
 
 /** @param {NS} ns */
 export function getServersToHack(ns) {
