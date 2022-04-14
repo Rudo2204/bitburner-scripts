@@ -36,7 +36,7 @@ export async function main(ns) {
     if (growthThreads === Infinity) {
         ns.print(target, " has $0 so I am assigning one thread to grow it once first");
         ns.exec(growScript, host, 1, 0, target);
-        await ns.sleep(ns.getGrowTime(target));
+        await ns.asleep(ns.getGrowTime(target) + 1000);
         // recalculate
         var {
             grow_delay,
