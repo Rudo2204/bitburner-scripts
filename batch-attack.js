@@ -42,12 +42,10 @@ export async function main(ns) {
 	const weaken2Ram = weakenThreads_2 * ns.getScriptRam(weakenScript);
 	const sumRam = hackRam + weaken1Ram + growthRam + weaken2Ram;
 
-
 	const safe_window = 500;
 	while (true) {
         var availableRam = ns.getServerMaxRam(host) - ns.getServerUsedRam(host) - reservedRam;
-        var no_batch = Math.min(availableRam/sumRam, depth);
-
+        var max_depth = Math.floor(availableRam/sumRam);
         var {
             period,
             hack_delay,
@@ -55,15 +53,16 @@ export async function main(ns) {
             grow_delay,
             weak_delay_2,
             depth
-        } = calculateDelays(ns, target);
-        var estimated_finish_time = safe_window + period * (no_batch - 1) - weak_delay_1;
+        } = calculateDelays(ns, target, max_depth);
 
-        ns.print("Scheduling ", no_batch, " batches on on target: ", target);
+        var estimated_finish_time = (weak_delay_1 + 3*200 + safe_window) * (depth - 1);
+
+        ns.print("Scheduling ", depth, " batches on on target: ", target);
 	    for (var i = 0; i < no_batch; i++) {
-	        ns.exec(hackScript, host, hackThreads, hack_delay + safe_window + period*i, target);
-	        ns.exec(weakenScript, host, weakenThreads_1, weak_delay_1 + safe_window + period*i, target);
-	        ns.exec(growScript, host, growthThreads, grow_delay + safe_window + period*i, target);
-	        ns.exec(weakenScript, host, weakenThreads_2, weak_delay_2 + safe_window + period*i, target);
+	        ns.exec(hackScript, host, hackThreads, hack_delay + (safe_window + period*i), target);
+	        ns.exec(weakenScript, host, weakenThreads_1, weak_delay_1 + (safe_window + period*i), target);
+	        ns.exec(growScript, host, growthThreads, grow_delay + (safe_window + period*i), target);
+	        ns.exec(weakenScript, host, weakenThreads_2, weak_delay_2 + (safe_window + period*i), target);
 	    }
 	    await ns.asleep(estimated_finish_time);
 	}

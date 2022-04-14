@@ -31,7 +31,7 @@ export function calculateThreads(ns, host, target, percentHack) {
 }
 
 /** @param {NS} ns */
-export function calculateDelays(ns, target) {
+export function calculateDelays(ns, target, max_depth) {
 	const t0 = 150;
 	var serv = ns.getServer(target);
 	serv.hackDifficulty = serv.minDifficulty;
@@ -43,8 +43,8 @@ export function calculateDelays(ns, target) {
 
 	let period, depth;
 	//const max_depth = 10;
-	//const kW_max = Math.min(Math.floor(1 + (weak_time - 4 * t0) / (8 * t0)), max_depth);
-	const kW_max = Math . floor (1 + ( weak_time - 4 * t0 ) / (8 * t0 ));
+	const kW_max = Math.min(Math.floor(1 + (weak_time - 4 * t0) / (8 * t0)), max_depth);
+	//const kW_max = Math . floor (1 + ( weak_time - 4 * t0 ) / (8 * t0 ));
 	schedule: for (let kW = kW_max; kW >= 1; --kW) {
 		const t_min_W = (weak_time + 4 * t0) / kW;
 		const t_max_W = (weak_time - 4 * t0) / (kW - 1);
