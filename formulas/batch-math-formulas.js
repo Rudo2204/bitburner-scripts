@@ -1,46 +1,17 @@
 /** @param {NS} ns */
-export function calculateThreads(ns, host, target, percentHack) {
-	var player = ns.getPlayer();
-	player.hacking = 9999; // assume we can hack everything
+export function calculateDelaysFormulas(ns, target) {
+	const t0 = 150;
 	var serv = ns.getServer(target);
-	// assume min security
 	serv.hackDifficulty = serv.minDifficulty;
 
-	const coreCounts = host == "home" ? 5 : ns.getServer(host).cpuCores;
-
-	const t = ns.formulas.hacking.hackPercent(serv, player);
-	const hackThreads = Math.floor(percentHack /t);
-	const weakenThreads_1 = Math.ceil(hackThreads/25);
-
-
-	var growthThreads = 0;
-	var growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
-	while (growPerc < 1/(1-t*hackThreads)) {
-		growthThreads += 1;
-		growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
-	}
-	const weakenThreads_2 = Math.ceil(growthThreads/12.5);
-
-	return {
-		hackThreads,
-		weakenThreads_1,
-		growthThreads,
-		weakenThreads_2
-	}
-
-}
-
-/** @param {NS} ns */
-export function calculateDelays(ns, target) {
-	const t0 = 150;
-
-	const hack_time = ns.getHackTime(target);
-	const grow_time = ns.getGrowTime(target);
-	const weak_time = ns.getWeakenTime(target);
+	var player = ns.getPlayer();
+	const hack_time = ns.formulas.hacking.hackTime(serv, player);
+	const grow_time = ns.formulas.hacking.growTime(serv, player);
+	const weak_time = ns.formulas.hacking.weakenTime(serv, player);
 
 	let period, depth;
 	const max_depth = 10;
-	const kW_max = Math.min(Math.floor(1 + (weak_time - 4 * t0) / (8 * t0)), max_depth);
+	const kW_max = Math.min(Math.floor(1 + (weak_time_min - 4 * t0) / (8 * t0)), max_depth);
 	//const kW_max = Math . floor (1 + ( weak_time - 4 * t0 ) / (8 * t0 ));
 	schedule: for (let kW = kW_max; kW >= 1; --kW) {
 		const t_min_W = (weak_time + 4 * t0) / kW;
