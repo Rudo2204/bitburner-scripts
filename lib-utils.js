@@ -84,7 +84,7 @@ export function getPrepStrategy(ns, host, target) {
 	const t0 = 150; // 150ms delay between G and W
 	const grow_time = ns.getGrowTime(target);
 	const weaken_time = ns.getWeakenTime(target);
-	const grow_delay = weaken_time - grow_time + t0;
+	const grow_delay = weaken_time - grow_time - t0;
 	return {
 		grow_delay,
 		growthThreads,
