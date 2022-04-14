@@ -42,7 +42,7 @@ export async function main(ns) {
 
     // we can afford this prep
     if (ramAfterWeaken > 0) {
-        ns.exec(weakenScript, host, growthThreads, 0, target);
+        ns.exec(weakenScript, host, weakenThreads, 0, target);
         ns.exec(growScript, host, growthThreads, grow_delay, target);
     } else {
         ns.tprint("We do not have enough RAM to do this manual prep");
