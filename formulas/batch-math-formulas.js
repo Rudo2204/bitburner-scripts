@@ -1,4 +1,36 @@
 /** @param {NS} ns */
+export function calculateThreads(ns, host, target, percentHack) {
+	var player = ns.getPlayer();
+	player.hacking = 9999; // assume we can hack everything
+	var serv = ns.getServer(target);
+	// assume min security
+	serv.hackDifficulty = serv.minDifficulty;
+
+	const coreCounts = ns.getServer(host).cpuCores;
+
+	const t = ns.formulas.hacking.hackPercent(serv, player);
+	const hackThreads = Math.floor(percentHack /t);
+	const weakenThreads_1 = Math.ceil(hackThreads/25);
+
+
+	var growthThreads = 0;
+	var growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
+	while (growPerc < 1/(1-t*hackThreads)) {
+		growthThreads += 1;
+		growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
+	}
+	const weakenThreads_2 = Math.ceil(growthThreads/12.5);
+
+	return {
+		hackThreads,
+		weakenThreads_1,
+		growthThreads,
+		weakenThreads_2
+	}
+
+}
+
+/** @param {NS} ns */
 export function calculateDelaysFormulas(ns, target) {
 	const t0 = 150;
 	var serv = ns.getServer(target);

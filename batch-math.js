@@ -1,24 +1,12 @@
 /** @param {NS} ns */
 export function calculateThreads(ns, host, target, percentHack) {
-	var player = ns.getPlayer();
-	player.hacking = 9999; // assume we can hack everything
-	var serv = ns.getServer(target);
-	// assume min security
-	serv.hackDifficulty = serv.minDifficulty;
+	const coreCounts = ns.getServer(host).cpuCores;
 
-	const coreCounts = host == "home" ? 5 : ns.getServer(host).cpuCores;
-
-	const t = ns.formulas.hacking.hackPercent(serv, player);
+    const t = ns.hackAnalyze(target);
 	const hackThreads = Math.floor(percentHack /t);
 	const weakenThreads_1 = Math.ceil(hackThreads/25);
 
-
-	var growthThreads = 0;
-	var growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
-	while (growPerc < 1/(1-t*hackThreads)) {
-		growthThreads += 1;
-		growPerc = ns.formulas.hacking.growPercent(serv, growthThreads, player, coreCounts);
-	}
+    const growthThreads = ns.growthAnalyze(target, 1/(1-percentHack), coreCounts);
 	const weakenThreads_2 = Math.ceil(growthThreads/12.5);
 
 	return {
