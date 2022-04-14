@@ -31,7 +31,7 @@ export function calculateThreads(ns, host, target, percentHack) {
 }
 
 /** @param {NS} ns */
-export function calculateDelaysFormulas(ns, target) {
+export function calculateDelays(ns, target) {
 	const t0 = 150;
 	var serv = ns.getServer(target);
 	serv.hackDifficulty = serv.minDifficulty;
