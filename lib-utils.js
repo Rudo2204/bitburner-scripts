@@ -72,8 +72,6 @@ export function getAvailableThreads(ns, isHackScript) {
 export function getPrepStrategy(ns, host, target) {
 	const securityDifference = ns.getServerSecurityLevel(target) - ns.getServerMinSecurityLevel(target);
 	const growthMoneyMultiplier = ns.getServerMaxMoney(target) / ns.getServerMoneyAvailable(target);
-	ns.tprint(ns.getServerMaxMoney(target));
-	ns.tprint(growthMoneyMultiplier);
 	if (securityDifference == 0 && growthMoneyMultiplier == 1) {
 		ns.tprint(target, " is prepped!")
 	}
