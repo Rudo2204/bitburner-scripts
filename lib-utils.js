@@ -70,25 +70,35 @@ export function getAvailableThreads(ns, isHackScript) {
 
 /** @param {NS} ns **/
 export function getPrepStrategy(ns, host, target) {
-	const securityDifference = ns.getServerSecurityLevel(target) - ns.getServerMinSecurityLevel(target);
 	const growthMoneyMultiplier = ns.getServerMaxMoney(target) / ns.getServerMoneyAvailable(target);
+    if (growthMoneyMultiplier === Infinity) {
+        var grow_delay = 0;
+        var growthThreads = Infinity;
+        var weakenThreads = 0;
+        return {
+            grow_delay,
+            growthThreads,
+            weakenThreads,
+        }
+    }
+	const securityDifference = ns.getServerSecurityLevel(target) - ns.getServerMinSecurityLevel(target);
 	if (securityDifference == 0 && growthMoneyMultiplier == 1) {
 		ns.tprint(target, " is prepped!")
 	}
 	const coreCounts = ns.getServer(host).cpuCores;
 
-	const growthThreads = Math.ceil(ns.growthAnalyze(target, growthMoneyMultiplier, coreCounts));
+	var growthThreads = Math.ceil(ns.growthAnalyze(target, growthMoneyMultiplier, coreCounts));
 	var securityAfterGrowth = growthThreads * 0.004 + ns.getServerSecurityLevel(target);
 	const serverMaxSecurity = ns.getServerMinSecurityLevel(target) * 3;
     if (securityAfterGrowth > serverMaxSecurity) {
         securityAfterGrowth  = serverMaxSecurity;
     }
-	const weakenThreads = Math.ceil((securityAfterGrowth - ns.getServerMinSecurityLevel(target)) / 0.05);
+	var weakenThreads = Math.ceil((securityAfterGrowth - ns.getServerMinSecurityLevel(target)) / 0.05);
 
 	const t0 = 300; // 300ms delay between G and W
 	const grow_time = ns.getGrowTime(target);
 	const weaken_time = ns.getWeakenTime(target);
-	const grow_delay = weaken_time - grow_time - t0;
+	var grow_delay = weaken_time - grow_time - t0;
 	return {
 		grow_delay,
 		growthThreads,
