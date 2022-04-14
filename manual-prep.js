@@ -14,11 +14,11 @@ export async function main(ns) {
         ns.exit();
     }
 
-    (
+    var {
         grow_delay,
         growthThreads,
         weakenThreads
-    ) = getPrepStrategy(ns, host, target);
+    } = getPrepStrategy(ns, host, target);
 
     const reservedRam = 16;
     const availableRam = ns.getServerMaxRam(host) - ns.getServerUsedRam(host) - reservedRam;
