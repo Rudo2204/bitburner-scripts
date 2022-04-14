@@ -1,4 +1,5 @@
 import {getPrepStrategy} from "./lib-utils.js";
+import {canHack, getRootAccess} from "./utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -12,6 +13,10 @@ export async function main(ns) {
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
         ns.tprint("This target is already prepped!");
         ns.exit();
+    }
+
+    if (!ns.hasRootAccess(target) && canHack(ns, target, cracks)) {
+        getRootAccess(ns, host, cracks);
     }
 
     var {

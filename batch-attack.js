@@ -1,4 +1,5 @@
 import { calculateDelays, calculateThreads } from "./batch-math.js";
+import {canHack, getRootAccess} from "./utils.js";
 /** @param {NS} ns */
 export async function main(ns) {
 	const cracks = {
