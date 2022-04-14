@@ -3,6 +3,14 @@ import {canHack, getRootAccess} from "./utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
+	const cracks = {
+		"BruteSSH.exe": ns.brutessh,
+		"FTPCrack.exe": ns.ftpcrack,
+		"relaySMTP.exe": ns.relaysmtp,
+		"HTTPWorm.exe": ns.httpworm,
+		"SQLInject.exe": ns.sqlinject
+	};
+
     const growScript = "grow.js";
     const weakenScript = "weaken.js";
 
