@@ -24,7 +24,7 @@ export async function main(ns) {
     }
 
     if (!ns.hasRootAccess(target) && canHack(ns, target, cracks)) {
-        getRootAccess(ns, host, cracks);
+        getRootAccess(ns, target, cracks);
     }
 
     var {
