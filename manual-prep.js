@@ -2,7 +2,7 @@ import {getPrepStrategy} from "./lib-utils.js";
 import {canHack, getRootAccess} from "./utils.js";
 
 /** @param {NS} ns **/
-export async function main(ns) {
+export async function prep(ns, host, target) {
 	const cracks = {
 		"BruteSSH.exe": ns.brutessh,
 		"FTPCrack.exe": ns.ftpcrack,
@@ -14,13 +14,10 @@ export async function main(ns) {
     const growScript = "grow.js";
     const weakenScript = "weaken.js";
 
-    const host = "home";
-    const target = ns.args[0];
-
     if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
-        ns.tprint("This target is already prepped!");
-        ns.exit();
+        ns.print("This target is already prepped!");
+        return
     }
 
     if (!ns.hasRootAccess(target) && canHack(ns, target, cracks)) {
@@ -61,6 +58,19 @@ export async function main(ns) {
             ns.exec(growScript, host, growthThreads, grow_delay, target);
         }
     } else {
-        ns.tprint("We do not have enough RAM to do this manual prep");
+        ns.print("We do not have enough RAM to do this manual prep");
     }
+}
+
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const host = "home";
+    const target = ns.args[0];
+    if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
+        && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
+        ns.print("This target is already prepped!");
+        ns.exit();
+    }
+    await prep(ns, host, target);
 }
