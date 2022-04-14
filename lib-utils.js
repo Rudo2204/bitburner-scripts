@@ -85,7 +85,7 @@ export function getPrepStrategy(ns, host, target) {
     }
 	const weakenThreads = Math.ceil((securityAfterGrowth - ns.getServerMinSecurityLevel(target)) / 0.05);
 
-	const t0 = 150; // 150ms delay between G and W
+	const t0 = 300; // 300ms delay between G and W
 	const grow_time = ns.getGrowTime(target);
 	const weaken_time = ns.getWeakenTime(target);
 	const grow_delay = weaken_time - grow_time - t0;
