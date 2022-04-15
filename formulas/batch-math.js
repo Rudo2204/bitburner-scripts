@@ -1,7 +1,6 @@
 /** @param {NS} ns */
 export function calculateThreads(ns, host, target, percentHack) {
 	var player = ns.getPlayer();
-	player.hacking = 9999; // assume we can hack everything
 	var serv = ns.getServer(target);
 	// assume min security
 	serv.hackDifficulty = serv.minDifficulty;
