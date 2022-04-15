@@ -24,6 +24,6 @@ export async function main(ns) {
 				getRootAccess(ns, host, cracks);
 			}
 		}
-		await ns.sleep(5000);
+		await ns.sleep(1000);
 	}
 }
