@@ -4,8 +4,8 @@ export async function main(ns) {
 	ns.disableLog("ALL");
 
 	const homeServer = "home";
-	var amountRamToBuy = Math.pow(2, 3); // starts with 8 GB then scale up * 2 in main
-	const maxRam = ns.getPurchasedServerMaxRam(); // 2*20
+	var amountRamToBuy = Math.pow(2, 10);
+	const maxRam = Math.pow(2, 20);
 
 	const serverLimit = ns.getPurchasedServerLimit();
 

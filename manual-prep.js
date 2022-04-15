@@ -69,7 +69,7 @@ export async function main(ns) {
     const target = ns.args[0];
     if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
-        ns.print("This target is already prepped!");
+        ns.tprint("This target is already prepped!");
         ns.exit();
     }
     await prep(ns, host, target);

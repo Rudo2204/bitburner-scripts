@@ -82,6 +82,7 @@ export async function copyAndRunHackScript(ns, host, hackScript, target, cracks)
 	}
 }
 
+/** @param {NS} ns **/
 export function getAvailableRam(ns, server) {
 	return ns.getServerMaxRam(server) - ns.getServerUsedRam(server);
 }

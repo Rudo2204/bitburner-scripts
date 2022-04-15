@@ -20,7 +20,7 @@ export function calculateThreads(ns, host, target, percentHack) {
 
 /** @param {NS} ns */
 export function calculateDelays(ns, target, max_depth) {
-	const t0 = 150;
+	const t0 = 200;
 
 	const hack_time = ns.getHackTime(target);
 	const grow_time = ns.getGrowTime(target);

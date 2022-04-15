@@ -11,8 +11,8 @@ export function getServersToHack(ns) {
 	};
 	var nodes = getNetworkNodes(ns);
 	nodes = nodes.filter(node =>
-		node == "home"
-		&& !node.includes("myserv")
+		node != "home"
+		&& !node.includes("pserv")
 		&& canHack(ns, node, cracks)
 	);
 	return nodes;
