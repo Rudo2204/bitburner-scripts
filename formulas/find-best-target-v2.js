@@ -109,13 +109,7 @@ export function getBestTargets(ns) {
 
 		var finalScoreArray = [];
 		for (var i = 0; i < hackableServers.length; i++) {
-			const node = hackableServers[i];
 			var finalScore = 0;
-			if (ns.getServerMaxMoney(node) == 0) {
-				finalScore = -1e100 - Math.random() * 1e100;
-				finalScoreArray.push(finalScore);
-				continue;
-			}
 			finalScore += hackingChanceFactorMultiplier * hackingChanceScoreNormalizedArray[i];
 			finalScore += cashFactorMultiplier * cashScoreNormalizedArray[i];
 			finalScore += growthFactorMultiplier * growthScoreNormalizedArray[i];

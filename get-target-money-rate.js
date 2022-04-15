@@ -1,5 +1,5 @@
 import { getNetworkNodes, canHack } from "./utils.js";
-import {getAvailableThreads} from "./lib-utils.js"
+import {getServersToHack, getAvailableThreads} from "./lib-utils.js"
 
 /** @param {NS} ns */
 export async function main(ns) {
@@ -12,7 +12,7 @@ export async function main(ns) {
 	};
 
 	const threshold = 75;
-	var nodes = getNetworkNodes(ns);
+	var nodes = getServersToHack(ns);
 
 	const threadCount = getAvailableThreads(ns);
 	ns.tprint(threadCount);
@@ -23,8 +23,6 @@ export async function main(ns) {
 	var bestRateNode = "";
 	var bestRate = 0;
 	var bestRateMoney = 0;
-
-	nodes = nodes.filter(node => !node.includes("pserv"));
 
 	for (var i = 0; i < nodes.length; i++) {
 		const node = nodes[i];
