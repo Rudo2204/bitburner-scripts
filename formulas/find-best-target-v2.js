@@ -110,6 +110,10 @@ export function getBestTargets(ns) {
 		var finalScoreArray = [];
 		for (var i = 0; i < hackableServers.length; i++) {
 			var finalScore = 0;
+		    var server = hackableServers[i];
+            if (ns.getServerRequiredHackingLevel(server)/2 > ns.getHackingLevel()) {
+                finalScore = -1e100 * (1+Math.random());
+            }
 			finalScore += hackingChanceFactorMultiplier * hackingChanceScoreNormalizedArray[i];
 			finalScore += cashFactorMultiplier * cashScoreNormalizedArray[i];
 			finalScore += growthFactorMultiplier * growthScoreNormalizedArray[i];
@@ -153,6 +157,6 @@ export function main(ns) {
 	const { serverArraySorted, scoreArraySorted } = getBestTargets(ns);
 
 	for (var i = 0; i < serverArraySorted.length; i++) {
-		ns.tprint(serverArraySorted[i], " has score ", scoreArraySorted[i]);
+		ns.tprint(serverArraySorted[i], " has score ", scoreArraySorted[i], ". Its level is ", ns.getServerRequiredHackingLevel(serverArraySorted[i]));
 	}
 }
