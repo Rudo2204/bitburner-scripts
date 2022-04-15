@@ -111,10 +111,11 @@ export function getBestTargets(ns) {
 		for (var i = 0; i < hackableServers.length; i++) {
 			var finalScore = 0;
 		    var server = hackableServers[i];
-            if (ns.getServerRequiredHackingLevel(server)/2 > ns.getHackingLevel()) {
-                finalScore = -1e100 * (1+Math.random());
-                continue;
-            }
+		    if (ns.getServerRequiredHackingLevel(server) > ns.getHackingLevel()*3/4) {
+		        finalScore = -1e100 * (1+Math.random());
+		        finalScoreArray.push(finalScore);
+		        continue;
+		    }
 			finalScore += hackingChanceFactorMultiplier * hackingChanceScoreNormalizedArray[i];
 			finalScore += cashFactorMultiplier * cashScoreNormalizedArray[i];
 			finalScore += growthFactorMultiplier * growthScoreNormalizedArray[i];
