@@ -17,7 +17,7 @@ export async function prep(ns, host, target) {
     if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
         ns.print("This target is already prepped!");
-        return
+        return;
     }
 
     if (!ns.hasRootAccess(target) && canHack(ns, target, cracks)) {
@@ -42,7 +42,7 @@ export async function prep(ns, host, target) {
         } = getPrepStrategy(ns, host, target);
     }
 
-    const reservedRam = 16;
+    const reservedRam = 32;
     const availableRam = ns.getServerMaxRam(host) - ns.getServerUsedRam(host) - reservedRam;
 
     // 1.75 is the RAM of growth/weaken script
@@ -65,7 +65,7 @@ export async function prep(ns, host, target) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    const host = "home";
+    const host = ns.getHostname();
     const target = ns.args[0];
     if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
