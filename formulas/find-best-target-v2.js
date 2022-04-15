@@ -133,7 +133,7 @@ export function getBestTargets(ns) {
 	const hackableServers = getServersToHack(ns);
 
 	// tweaks the values: money, hack chance, hack time, how fast server growth, grow time, weaken time
-	const scoreArray = getFinalServersScore(ns, hackableServers, true, 50, 0, 15, 5, 1, 20);
+	const scoreArray = getFinalServersScore(ns, hackableServers, true, 2000, 0, 1, 5, 5, 20);
 
 	var scoreArraySorted = JSON.parse(JSON.stringify(scoreArray));
 	scoreArraySorted.sort(function (a, b) { return b - a }); // REVERSE SORT
