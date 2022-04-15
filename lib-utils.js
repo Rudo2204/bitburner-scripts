@@ -90,11 +90,9 @@ export function getPrepStrategy(ns, host, target) {
 
 	var growthThreads = Math.ceil(ns.growthAnalyze(target, growthMoneyMultiplier, coreCounts));
 	var securityAfterGrowth = growthThreads * 0.004 + ns.getServerSecurityLevel(target);
-	const serverMaxSecurity = ns.getServerMinSecurityLevel(target) * 3;
-    if (securityAfterGrowth > serverMaxSecurity) {
-        securityAfterGrowth  = serverMaxSecurity;
-    }
-	var weakenThreads = Math.ceil((securityAfterGrowth - ns.getServerMinSecurityLevel(target)) / 0.05);
+	var weakenThreadsCalc = (securityAfterGrowth - ns.getServerMinSecurityLevel(target)) / 0.05
+	var weakEffectOnHost = ns.weakenAnalyze(1, ns.getServer(host).cpuCores);
+	var weakenThreads = Math.ceil(Math.min(weakenThreadsCalc, securityAfterGrowth/weakEffectOnHost));
 
 	const t0 = 1000; // delay between G and W
 	const grow_time = ns.getGrowTime(target);
