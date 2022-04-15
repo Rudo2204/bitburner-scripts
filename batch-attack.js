@@ -1,5 +1,5 @@
-import { calculateDelays, calculateThreads } from "./batch-math.js";
-//import { calculateDelays, calculateThreads } from "./formulas/batch-math.js";
+//import { calculateDelays, calculateThreads } from "./batch-math.js";
+import { calculateDelays, calculateThreads } from "./formulas/batch-math.js";
 import {canHack, getRootAccess} from "./utils.js";
 /** @param {NS} ns */
 export async function main(ns) {
