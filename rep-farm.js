@@ -2,7 +2,6 @@ import {copyAndRunScript} from "./utils.js";
 /** @param {NS} ns **/
 export async function main(ns) {
     const shareScript = "share.js";
-    const shareScriptRam = 4;
 	const cracks = {
 		"BruteSSH.exe": ns.brutessh,
 		"FTPCrack.exe": ns.ftpcrack,
