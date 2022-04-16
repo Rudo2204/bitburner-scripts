@@ -37,5 +37,11 @@ export function main(ns) {
 	}
 
 	const path = find_path_to_target(ns, target);
-	ns.tprint(path);
+	var take_me = "";
+	// skip origin, aka "home"
+    for (var i = 1; i < path.length; i++) {
+        var node = path[i];
+	    take_me += "connect " + node + ";";
+    }
+    ns.tprint(take_me);
 }
