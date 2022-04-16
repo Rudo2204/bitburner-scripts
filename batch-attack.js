@@ -56,8 +56,12 @@ export async function main(ns) {
     } = calculateDelays(ns, target, max_depth);
 
     ns.print("Scheduling ", depth, " batches on on target: ", target);
-	for (var i = 0; i < depth; i++) {
-	    ns.exec(hackScript, host, hackThreads, hack_delay + (safe_window + period)*i, target);
+    var skip = depth * 0.1;
+    var skip_ratio = Math.floor((depth-skip)/skip);
+	for (var i = 1; i <= depth; i++) {
+        if (i % skip_ratio) {
+	    	ns.exec(hackScript, host, hackThreads, hack_delay + (safe_window + period)*i, target);
+        }
 	    ns.exec(weakenScript, host, weakenThreads_1, weak_delay_1 + (safe_window + period)*i, target);
 	    ns.exec(growScript, host, growthThreads, grow_delay + (safe_window + period)*i, target);
 	    ns.exec(weakenScript, host, weakenThreads_2, weak_delay_2 + (safe_window + period)*i, target);
