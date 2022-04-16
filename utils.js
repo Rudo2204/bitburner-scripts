@@ -67,18 +67,18 @@ export function getNetworkNodes(ns) {
 }
 
 /** @param {NS} ns **/
-export async function copyAndRunHackScript(ns, host, hackScript, target, cracks) {
-	const hackScriptRam = ns.getScriptRam(hackScript);
-	if (!ns.isRunning(hackScript, host, target) && canHack(ns, host, cracks)) {
-		const maxThreads = parseInt(Math.floor(ns.getServerMaxRam(host) / hackScriptRam));
+export async function copyAndRunScript(ns, host, script, target, cracks) {
+	const scriptRam = ns.getScriptRam(script);
+	if (!ns.isRunning(script, host, target) && canHack(ns, host, cracks)) {
+		const maxThreads = parseInt(Math.floor(ns.getServerMaxRam(host) / scriptRam));
 		if (maxThreads == 0) {
 			ns.print(host, " has too little ram, skipping...");
 			return;
 		}
-		ns.print("Copying hackScript to server: " + host);
-		await ns.scp(hackScript, host);
-		ns.scriptKill(hackScript, host);
-		ns.exec(hackScript, host, maxThreads, target);
+		ns.print("Copying script to server: " + host);
+		await ns.scp(script, host);
+		ns.scriptKill(script, host);
+		ns.exec(script, host, maxThreads, target);
 	}
 }
 
