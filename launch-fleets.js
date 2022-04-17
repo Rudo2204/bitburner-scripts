@@ -307,7 +307,7 @@ export async function main(ns) {
 			continue;
 		}
 
-        var targets = getPotentialTargets(ns, priority);
+        var targets = getPotentialTargets(ns);
 		for (var target of targets) {
 			var targetNode = target.node;
 			var reqs = getRequirements(targetNode);
