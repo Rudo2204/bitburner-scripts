@@ -1,4 +1,4 @@
-import { getBestTargets } from "./formulas/find-best-target-v2.js";
+import { getPotentialTargets } from "./fleet-find-targets.js";
 import {
 	getNetworkNodes,
 	getRootAccess,
@@ -296,7 +296,7 @@ export async function main(ns) {
 	}
 
 
-	const tick = 5000; // sleep for 1s
+	const tick = 1000; // sleep for 1s
 
 	while (true) {
 		var ships = await getShips(ns, hackScript);
@@ -307,9 +307,9 @@ export async function main(ns) {
 			continue;
 		}
 
-		const { serverArraySorted, scoreArraySorted } = getBestTargets(ns);
-		for (var i = 0; i < serverArraySorted.length; i++) {
-			var targetNode = serverArraySorted[i];
+        var targets = getPotentialTargets(ns, priority);
+		for (var target of targets) {
+			var targetNode = target.node;
 			var reqs = getRequirements(targetNode);
 			var { fleets, assigned } = createFleets(reqs, ships);
 			// SET SAIL!

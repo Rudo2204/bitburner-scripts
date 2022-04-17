@@ -4,7 +4,7 @@ export async function main(ns) {
 	ns.disableLog("ALL");
 
 	const homeServer = "home";
-	var amountRamToBuy = Math.pow(2, 10);
+	var amountRamToBuy = Math.pow(2, 20);
 	const maxRam = Math.pow(2, 20);
 
 	const serverLimit = ns.getPurchasedServerLimit();
