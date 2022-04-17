@@ -1,4 +1,4 @@
-import { canHack, getRootAccess, getNetworkNodes, copyAndRunHackScript } from "./utils.js";
+import { canHack, getRootAccess, getNetworkNodes, copyAndRunScript } from "./utils.js";
 
 /** @param {NS} ns */
 export async function main(ns) {
@@ -22,7 +22,7 @@ export async function main(ns) {
 				getRootAccess(ns, host, cracks);
 			}
             if (ns.getServerMaxRam(host) > 0) {
-                await copyAndRunHackScript(ns, host, hackScript, target, cracks);
+                await copyAndRunScript(ns, host, hackScript, target, cracks);
             }
 		}
 		await ns.sleep(10000);
