@@ -56,7 +56,7 @@ export async function main(ns) {
     } = calculateDelays(ns, target, max_depth);
 
     ns.print("Scheduling ", depth, " batches on on target: ", target);
-    prepHost(host);
+    await prepHost(ns, host);
     var skip = depth * 0.1;
     var skip_ratio = Math.floor((depth-skip)/skip);
 	for (var i = 1; i <= depth; i++) {
