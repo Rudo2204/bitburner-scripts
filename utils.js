@@ -67,6 +67,13 @@ export function getNetworkNodes(ns) {
 }
 
 /** @param {NS} ns **/
+export async function prepHost(ns, host) {
+    await ns.scp("weaken.js", host);
+    await ns.scp("hack.js", host);
+    await ns.scp("grow.js", host);
+}
+
+/** @param {NS} ns **/
 export async function copyAndRunScript(ns, host, script, target, cracks) {
 	const scriptRam = ns.getScriptRam(script);
 	if (!ns.isRunning(script, host, target) && canHack(ns, host, cracks)) {

@@ -1,6 +1,6 @@
 //import { calculateDelays, calculateThreads } from "./batch-math.js";
 import { calculateDelays, calculateThreads } from "./formulas/batch-math.js";
-import {canHack, getRootAccess} from "./utils.js";
+import {canHack, getRootAccess, prepHost} from "./utils.js";
 /** @param {NS} ns */
 export async function main(ns) {
     ns.disableLog("ALL");
@@ -56,6 +56,7 @@ export async function main(ns) {
     } = calculateDelays(ns, target, max_depth);
 
     ns.print("Scheduling ", depth, " batches on on target: ", target);
+    prepHost(host);
     var skip = depth * 0.1;
     var skip_ratio = Math.floor((depth-skip)/skip);
 	for (var i = 1; i <= depth; i++) {
