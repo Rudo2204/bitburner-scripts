@@ -1,3 +1,4 @@
+// Project euler 18, but minimum instead of maximum
 export function minimumPathSumInATriangle(input) {
     // array1 is the smaller one
     function build_bottom_array(array1, array2) {
@@ -16,6 +17,7 @@ export function minimumPathSumInATriangle(input) {
     return current_array[0];
 }
 
+// leetcode 93
 export function generateIpAddresses(input) {
     function valid(integer) {
         if (!integer.length || integer > 255) {
@@ -58,6 +60,7 @@ export const algorithmicStockTraderIII = input => _getMaxProfit(2, input);
 export const algorithmicStockTraderIV = input => _getMaxProfit(input[0], input[1]);
 
 // https://www.youtube.com/watch?v=lJxuwClVN2w
+// leetcode 188
 function _getMaxProfit(number_of_transactions, input) {
     var length_input = input.length;
     // dp is created to keep track of "local" profit of each transaction
@@ -77,6 +80,7 @@ function _getMaxProfit(number_of_transactions, input) {
     return dp[dp.length-1];
 }
 
+// leet code 45
 //function arrayJumpingGameII(input) {
 //    var length_input = input.length;
 //    var dp = new Array(length_input); for (let i=0; i<length_input; ++i) dp[i] = Infinity;
@@ -108,7 +112,37 @@ export function arrayJumpingGameII(input) {
     return jump;
 }
 
+// easier version, see leetcode 45
 export function arrayJumpingGameI(input) {
     const jump = arrayJumpingGameII(input);
     return jump > 1 ? 1 : 0;
 }
+
+// leetcode 39, but easier, since we fill the candidates with array generated from input
+// https://www.youtube.com/watch?v=2_58CA1fyn4
+function _getCombinationSum(candidates, target) {
+    var length_candidates = candidates.length;
+    var dp = new Array(length_candidates); for (let i=0; i < target + 1; ++i) dp[i] = [];
+
+    for (var i = 0; i < length_candidates; i++) {
+        var c = candidates[i];
+        for (var t = 1; t < target + 1; t++) {
+            if (c > t) {
+                continue;
+            }
+            if (c == t) {
+                dp[t].push([c])
+            }
+            var tmp_length = dp[t-c].length;
+            for (var j = 0; j < tmp_length; j++) {
+                var l = dp[t-c][j];
+                dp[t].push(l + [c]);
+            }
+        }
+    }
+
+    return dp.slice(-1)[0].slice(0, -1).length;
+}
+
+export const totalWaysToSumI = input => _getCombinationSum(Array.from({length: input}, (_, i) => i + 1), input);
+export const totalWaysToSumII = input => _getCombinationSum(input[1], input[0]);
