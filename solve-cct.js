@@ -29,23 +29,23 @@ export async function main(ns) {
         && !node.includes("pserv")
     );
     for (var i = 0; i < nodes.length; i++) {
-    var node = nodes[i];
+        var node = nodes[i];
         var contracts = ns.ls(node, "contract");
         if (contracts.length > 0) {
             for (var j = 0; j < contracts.length; j++) {
                 var contract_name = contracts[j];
-                var contract_type = ns.CodingContract.getContractType(contract_name, node);
-                var tries = ns.CodingContract.getNumTriesRemaining(contract_name, node);
+                var contract_type = ns.codingcontract.getContractType(contract_name, node);
+                var tries = ns.codingcontract.getNumTriesRemaining(contract_name, node);
 
                 if (!solvers.hasOwnProperty(contract_type)) {
-                    ns.tprint(contract_name, " in host ", node, " is type: ", contract_type, ". I cannot solve this. This contract has ", tries, " remaining");
+                    ns.tprint("Don't know how to solve ", contract_name, " on node ", node, " its type: ", contract_type, ". This contract has ", tries, " tries remaining");
                     continue;
                 }
 
-                const contract_data = ns.CodingContract.getData(contract_name, node);
+                const contract_data = ns.codingcontract.getData(contract_name, node);
                 const solver = solvers[contract_type];
                 const answer = solver(contract_data);
-                const reward = ns.codingcontract.attempt(answer, cct_name, host, {returnReward: true});
+                const reward = ns.codingcontract.attempt(answer, contract_name, node, {returnReward: true});
                 ns.tprint(reward);
             }
         }
