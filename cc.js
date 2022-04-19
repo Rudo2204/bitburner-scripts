@@ -675,10 +675,10 @@ function HammingDecode(_data) {
     return parseInt(_build.join(""), 2); // parse the integer with redux 2 and we're done!
 }
 
-export function HCIntegerToEncodedBinary(input) {
+export function hcIntegerToEncodedBinary(input) {
     return HammingEncode(input);
 }
 
-export function HCEncodedBinaryToInteger(input) {
+export function hcEncodedBinaryToInteger(input) {
     return HammingDecode(input);
 }

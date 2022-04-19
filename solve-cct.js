@@ -19,8 +19,8 @@ import {
     sanitizeParenthesesInExpression,
     shortestPathInAGrid,
     findValidMathExpressions,
-    HCIntegerToEncodedBinary,
-    HCEncodedBinaryToInteger,
+    hcIntegerToEncodedBinary,
+    hcEncodedBinaryToInteger,
 } from "./cc.js"
 
 const solvers = {
@@ -43,9 +43,9 @@ const solvers = {
     "Sanitize Parentheses in Expression": sanitizeParenthesesInExpression,
     "Shortest Path in a Grid": shortestPathInAGrid,
     "Find All Valid Math Expressions": findValidMathExpressions,
-    "HammingCodes: Integer to encoded Binary": HCIntegerToEncodedBinary,
-    "HammingCodes: Integer to Encoded Binary": HCIntegerToEncodedBinary,
-    "HammingCodes: Encoded Binary to Integer": HCEncodedBinaryToInteger,
+    "HammingCodes: Integer to encoded Binary": hcIntegerToEncodedBinary,
+    "HammingCodes: Integer to Encoded Binary": hcIntegerToEncodedBinary,
+    "HammingCodes: Encoded Binary to Integer": hcEncodedBinaryToInteger,
 };
 
 /** @param {NS} ns **/
