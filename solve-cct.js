@@ -10,6 +10,17 @@ import {
     arrayJumpingGameII,
     totalWaysToSumI,
     totalWaysToSumII,
+    findLargestPrimeFactor,
+    subarrayWithMaximumSum,
+    spiralizeMatrix,
+    mergeOverlappingIntervals,
+    uniquePathsInAGridI,
+    uniquePathsInAGridII,
+    sanitizeParenthesesInExpression,
+    generateAnswerFromDistanceArray,
+    findValidMathExpressions,
+    HCIntegerToEncodedBinary,
+    HCEncodedBinaryToInteger,
 } from "./cc.js"
 
 const solvers = {
@@ -22,7 +33,19 @@ const solvers = {
     "Array Jumping Game": arrayJumpingGameI,
     "Array Jumping Game II": arrayJumpingGameII,
     "Total Ways to Sum": totalWaysToSumI,
-    "Total Ways to Sum II": totalWaysToSumI,
+    "Total Ways to Sum II": totalWaysToSumII,
+    "Find Largest Prime Factor": findLargestPrimeFactor,
+    "Subarray with Maximum Sum": subarrayWithMaximumSum,
+    "Spiralize Matrix": spiralizeMatrix,
+    "Merge Overlapping Intervals": mergeOverlappingIntervals,
+    "Unique Paths in a Grid I": uniquePathsInAGridI,
+    "Unique Paths in a Grid II": uniquePathsInAGridII,
+    "Sanitize Parentheses in Expression": sanitizeParenthesesInExpression,
+    "Shortest Path in a Grid": generateAnswerFromDistanceArray,
+    "Find All Valid Math Expressions": findValidMathExpressions,
+    "HammingCodes: Integer to encoded Binary": HCIntegerToEncodedBinary,
+    "HammingCodes: Integer to Encoded Binary": HCIntegerToEncodedBinary,
+    "HammingCodes: Encoded Binary to Integer": HCEncodedBinaryToInteger,
 };
 
 /** @param {NS} ns **/
