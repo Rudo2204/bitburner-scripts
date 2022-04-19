@@ -454,7 +454,7 @@ class MinHeap extends BinHeap {
     }
 }
 
-export function generateAnswerFromDistanceArray(distanceArray, dstX, dstY) {
+function generateAnswerFromDistanceArray(distanceArray, dstX, dstY) {
     var res = "";
 
     var ansX = 0;
@@ -498,7 +498,7 @@ export function generateAnswerFromDistanceArray(distanceArray, dstX, dstY) {
 }
 
 // leetcode 1293
-function uniqPath(data) {
+export function shortestPathInAGrid(data) {
     const width = data[0].length;
     const height = data.length;
     const dstY = height - 1;
