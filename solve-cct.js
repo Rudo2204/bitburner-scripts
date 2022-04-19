@@ -8,6 +8,8 @@ import {
     algorithmicStockTraderIV,
     arrayJumpingGameI,
     arrayJumpingGameII,
+    totalWaysToSumI,
+    totalWaysToSumII,
 } from "./cc.js"
 
 const solvers = {
@@ -19,6 +21,8 @@ const solvers = {
     "Algorithmic Stock Trader IV": algorithmicStockTraderIV,
     "Array Jumping Game": arrayJumpingGameI,
     "Array Jumping Game II": arrayJumpingGameII,
+    "Total Ways to Sum": totalWaysToSumI,
+    "Total Ways to Sum II": totalWaysToSumI,
 };
 
 /** @param {NS} ns **/
