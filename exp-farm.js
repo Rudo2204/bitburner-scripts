@@ -1,4 +1,4 @@
-import {getNetworkNodes} from "./utils.js";
+import {getNetworkNodes, canHack} from "./utils.js";
 
 /** @param {NS} ns **/
 export async function main(ns) {
@@ -9,10 +9,12 @@ export async function main(ns) {
     //  }
     //}
     //
-    // either target = foodnstuff + weaken-farm-exp.js
-    // or target = joesguns + grow
-    const target = "foodnstuff"; // best server to hack exp farm
-    const script = "weaken-farm-exp.js";
+    // either foodnstuff + weaken-farm-exp.js
+    // or joesguns + grow
+
+    const target = "joesguns"; // best server to hack exp farm
+    //const target = "foodnstuff"; // best server to hack exp farm
+    const script = "joesguns-grow-exp-farm.js";
 	const cracks = {
 		"BruteSSH.exe": ns.brutessh,
 		"FTPCrack.exe": ns.ftpcrack,
@@ -28,9 +30,9 @@ export async function main(ns) {
     for (var i = 0; i < nodes.length; i++) {
         var serv = nodes[i];
 		const maxThreads = parseInt(Math.floor(ns.getServerMaxRam(serv) / 1.75));
-		ns.print("Copying script to server: " + host);
-		await ns.scp(script, host);
-		ns.scriptKill(script, host);
-		ns.exec(script, host, maxThreads, target);
+		ns.print("Copying script to server: " + node);
+		await ns.scp(script, node);
+		ns.scriptKill(script, node);
+		ns.exec(script, node, maxThreads, target);
     }
 }
