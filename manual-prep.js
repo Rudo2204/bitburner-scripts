@@ -65,8 +65,13 @@ export async function prep(ns, host, target) {
 
 /** @param {NS} ns **/
 export async function main(ns) {
-    const host = ns.getHostname();
     const target = ns.args[0];
+    let host;
+    if (ns.args.length > 1) {
+        host = ns.args[1];
+    } else {
+        host = ns.getHostname();
+    }
     if (ns.getServerSecurityLevel(target) == ns.getServerMinSecurityLevel(target)
         && ns.getServerMoneyAvailable(target) == ns.getServerMaxMoney(target)) {
         ns.tprint("This target is already prepped!");
