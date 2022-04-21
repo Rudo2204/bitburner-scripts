@@ -28,8 +28,8 @@ export async function main(ns) {
         && ns.getServerMaxRam(node) > 1.75
     );
     for (var i = 0; i < nodes.length; i++) {
-        var serv = nodes[i];
-		const maxThreads = parseInt(Math.floor(ns.getServerMaxRam(serv) / 1.75));
+        var node = nodes[i];
+		const maxThreads = parseInt(Math.floor(ns.getServerMaxRam(node) / 1.75));
 		ns.print("Copying script to server: " + node);
 		await ns.scp(script, node);
 		ns.scriptKill(script, node);
